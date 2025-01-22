@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://ch1lcm147axxj"]
+
+[ext_resource type="Texture2D" uid="uid://d1w1lypsctpw0" path="res://icons/bug_icons/centipede_progart.png" id="1_tktdu"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_q0p8i"]
+
+[resource]
+script = ExtResource("2_q0p8i")
+place_description = "Discard any one of your cards, and reactivate one of your placed cards."
+reactivate_description = "Discard any card, and then discard up to two of your cards and draw up to three."
+name = "Centipede"
+icon = ExtResource("1_tktdu")

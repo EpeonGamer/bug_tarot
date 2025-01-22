@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://koe62g3dtrfd"]
+
+[ext_resource type="Texture2D" uid="uid://bwa8wyfjgunf4" path="res://icons/bug_icons/beetle_progart.png" id="1_lj1iy"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_hgstu"]
+
+[resource]
+script = ExtResource("2_hgstu")
+place_description = "Take the top card of any discard pile into your hand."
+reactivate_description = "Take the top card of any discard pile into your hand."
+name = "Beetle"
+icon = ExtResource("1_lj1iy")

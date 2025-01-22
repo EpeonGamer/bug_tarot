@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://du3atf6sfuoje"]
+
+[ext_resource type="Texture2D" uid="uid://cpfffg7yjesda" path="res://icons/bug_icons/mosquito_progart.png" id="1_hly3n"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_u8x32"]
+
+[resource]
+script = ExtResource("2_u8x32")
+place_description = "Choose one psyche type. Each player with a card with that psyche must discard a card."
+reactivate_description = "Reactivate one of another player's placed cards as one of your own. The card remains theirs afterwards."
+name = "Mosquito"
+icon = ExtResource("1_hly3n")

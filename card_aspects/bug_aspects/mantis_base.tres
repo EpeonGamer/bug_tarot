@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://dmq884a6j8qhk"]
+
+[ext_resource type="Texture2D" uid="uid://cbagygiyeuuv3" path="res://icons/bug_icons/mantis_progart.png" id="1_erkfh"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_qu5y2"]
+
+[resource]
+script = ExtResource("2_qu5y2")
+place_description = "Take any currently placed card into your hand."
+reactivate_description = "Swap any two placed cards."
+name = "Mantis"
+icon = ExtResource("1_erkfh")

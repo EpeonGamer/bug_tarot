@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://dndo7os15r14l"]
+
+[ext_resource type="Texture2D" uid="uid://b1xtf6fhtmiyn" path="res://icons/bug_icons/snail_progart.png" id="1_0m35f"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_84laq"]
+
+[resource]
+script = ExtResource("2_84laq")
+place_description = "Take up to three cards from any discard piles and place them at the top of your deck."
+reactivate_description = "Trigger the \"place\" ability of one of your placed cards."
+name = "Snail"
+icon = ExtResource("1_0m35f")

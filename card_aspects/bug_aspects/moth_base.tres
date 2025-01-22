@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://bcpt34vdy0tbt"]
+
+[ext_resource type="Texture2D" uid="uid://ebsvrgujl4hw" path="res://icons/bug_icons/moth_progart.png" id="1_qcsib"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_44cwh"]
+
+[resource]
+script = ExtResource("2_44cwh")
+place_description = "Select one player to reveal their hand to you."
+reactivate_description = "All placed cards with the fire element are returned to their player's hand."
+name = "Moth"
+icon = ExtResource("1_qcsib")

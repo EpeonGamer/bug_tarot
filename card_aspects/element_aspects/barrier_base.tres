@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseElement" load_steps=3 format=3 uid="uid://bjffl488kndpp"]
+
+[ext_resource type="Texture2D" uid="uid://cbrtnj61w8hgx" path="res://icons/element_icons/barrier_progart.png" id="1_gujps"]
+[ext_resource type="Script" path="res://resources/base_element.gd" id="1_n63bj"]
+
+[resource]
+script = ExtResource("1_n63bj")
+trigger_description = "The barrier card is placed and another placed card would be affected."
+action_description = "The other card is unaffected and the effect applies to the barrier card instead."
+name = "Barrier"
+icon = ExtResource("1_gujps")

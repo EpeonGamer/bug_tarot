@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://b8hsswlo3ap7g"]
+
+[ext_resource type="Texture2D" uid="uid://ctrnwjsthtioi" path="res://icons/bug_icons/wasp_progart.png" id="1_pcmkd"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_731xi"]
+
+[resource]
+script = ExtResource("2_731xi")
+place_description = "Up to two of any placed cards of your choice must be discarded, and their player must place new cards in their place where possible. This does not trigger their \"place\" ability."
+reactivate_description = "One placed card of your choice must be discarded, and their player must place new cards in their place where possible. This does not trigger their \"place\" ability."
+name = "Wasp"
+icon = ExtResource("1_pcmkd")

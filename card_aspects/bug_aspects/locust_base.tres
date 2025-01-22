@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://bys47y7redug8"]
+
+[ext_resource type="Texture2D" uid="uid://g0tskp0lkryy" path="res://icons/bug_icons/locust_progart.png" id="1_i7kwc"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_772dh"]
+
+[resource]
+script = ExtResource("2_772dh")
+place_description = "Choose one psyche type. Discard all cards with that type."
+reactivate_description = "All other players must discard one card from their hand if possible."
+name = "Locust"
+icon = ExtResource("1_i7kwc")

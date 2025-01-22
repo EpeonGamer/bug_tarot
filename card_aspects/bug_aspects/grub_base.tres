@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://ca6yep01gyay5"]
+
+[ext_resource type="Texture2D" uid="uid://cdaumly1k7ixv" path="res://icons/bug_icons/grub_progart.png" id="1_btrou"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_kyecb"]
+
+[resource]
+script = ExtResource("2_kyecb")
+place_description = "Draw up to three cards."
+reactivate_description = "Draw one card."
+name = "Grub"
+icon = ExtResource("1_btrou")

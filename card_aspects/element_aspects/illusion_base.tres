@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseElement" load_steps=3 format=3 uid="uid://gbygd6r3xpts"]
+
+[ext_resource type="Texture2D" uid="uid://68qye1o65pmu" path="res://icons/element_icons/illusion_progart.png" id="1_veipv"]
+[ext_resource type="Script" path="res://resources/base_element.gd" id="2_ji0bs"]
+
+[resource]
+script = ExtResource("2_ji0bs")
+trigger_description = "The illusion card is not placed and any placed card would be affected."
+action_description = "You can swap the illusion card with the affected card, instead applying the affect to the illusion card. Swapping with an opponent's card gives them control of this card."
+name = "Illusion"
+icon = ExtResource("1_veipv")

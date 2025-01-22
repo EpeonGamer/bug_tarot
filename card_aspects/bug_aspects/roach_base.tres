@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://0t823hhohut5"]
+
+[ext_resource type="Texture2D" uid="uid://bwqxwe3iplrpf" path="res://icons/bug_icons/roach_progart.png" id="1_dbw0m"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_dbdwo"]
+
+[resource]
+script = ExtResource("2_dbdwo")
+place_description = "Discard any number of your cards and draw up to the same number."
+reactivate_description = "If fewer than four cards are placed for you, place another card and trigger its \"place\" effect."
+name = "Roach"
+icon = ExtResource("1_dbw0m")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://clh57ptdn1hre"]
+
+[ext_resource type="Texture2D" uid="uid://bqh7g0yqs3gre" path="res://icons/bug_icons/fly_progart.png" id="1_gtijd"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_hemw1"]
+
+[resource]
+script = ExtResource("2_hemw1")
+place_description = "For every placed card with the servant psyche, discard any one card of your choice."
+reactivate_description = "All cards with the sloth element are returned to their player's hand."
+name = "Fly"
+icon = ExtResource("1_gtijd")

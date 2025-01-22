@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseElement" load_steps=3 format=3 uid="uid://cs0fy7r61yuup"]
+
+[ext_resource type="Texture2D" uid="uid://b3bk41kiddkfm" path="res://icons/element_icons/swarm_progart.png" id="1_yocu0"]
+[ext_resource type="Script" path="res://resources/base_element.gd" id="2_0o6kk"]
+
+[resource]
+script = ExtResource("2_0o6kk")
+trigger_description = "Another swarm card is placed or reactivated by you, while this card is placed."
+action_description = "If no other swarm cards than the triggering cards of you have been reactivated this turn, this card can be reactivated."
+name = "Swarm"
+icon = ExtResource("1_yocu0")

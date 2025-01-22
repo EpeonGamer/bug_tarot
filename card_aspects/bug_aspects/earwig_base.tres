@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://12r0d54jxf1d"]
+
+[ext_resource type="Texture2D" uid="uid://dlt0qrj1bxxug" path="res://icons/bug_icons/earwig_progart.png" id="1_t66v7"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_262dg"]
+
+[resource]
+script = ExtResource("2_262dg")
+place_description = "Choose another player. They must choose one of their placed cards to discard."
+reactivate_description = "Choose any one card with the barrier element and discard it."
+name = "Earwig"
+icon = ExtResource("1_t66v7")

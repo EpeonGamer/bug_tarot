@@ -17,11 +17,11 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Autoload="res://Resources/autoload_INACTIVE.gd"
+Autoload="res://resources/autoload_INACTIVE.gd"
 
 [display]
 
-window/size/viewport_width=430
+window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 

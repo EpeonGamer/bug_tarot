@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://bmi3ku5xkejin"]
+
+[ext_resource type="Texture2D" uid="uid://cdpph6j2ojb7c" path="res://icons/bug_icons/pillbug_progart.png" id="1_tfefm"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_gw6lq"]
+
+[resource]
+script = ExtResource("2_gw6lq")
+place_description = "Take the top two cards from any discard piles into your hand."
+reactivate_description = "Discard this card and any two others."
+name = "Pillbug"
+icon = ExtResource("1_tfefm")

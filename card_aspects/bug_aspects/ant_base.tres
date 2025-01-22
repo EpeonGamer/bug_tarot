@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://d0mgsj8i7gq3w"]
+
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="1_2yjkb"]
+[ext_resource type="Texture2D" uid="uid://bloxkm5ydg8bl" path="res://icons/bug_icons/ant_progart.png" id="1_7ew0i"]
+
+[resource]
+script = ExtResource("1_2yjkb")
+place_description = "Take all placed cards with the swarm element and add them to the top of your deck."
+reactivate_description = "Draw a card, and if you have less than 4 placed cards, you can place one card and use its 'place' effect."
+name = "Ant"
+icon = ExtResource("1_7ew0i")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://iih87dv54bup"]
+
+[ext_resource type="Texture2D" uid="uid://b5ev1e6amjtbl" path="res://icons/bug_icons/worm_progart.png" id="1_lnylm"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_dvvut"]
+
+[resource]
+script = ExtResource("2_dvvut")
+place_description = "Swap any held hand with that of another player."
+reactivate_description = "Swap any held card with one of another player."
+name = "Worm"
+icon = ExtResource("1_lnylm")

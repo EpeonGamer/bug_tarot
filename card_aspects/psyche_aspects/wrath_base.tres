@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BasePsyche" load_steps=3 format=3 uid="uid://c6eab088whlfa"]
+
+[ext_resource type="Script" path="res://resources/base_psyche.gd" id="1_pk5og"]
+[ext_resource type="Texture2D" uid="uid://hjng7mlmvatb" path="res://icons/psych_icons/wrath_progart.png" id="1_wgudf"]
+
+[resource]
+script = ExtResource("1_pk5og")
+condition_description = "Another player has discarded a card on your turn, and this card is placed."
+cost_description = "One other of your placed cards must be discarded."
+effect_description = "The reactivate effect of this card applies to one additional card."
+name = "Wrath"
+icon = ExtResource("1_wgudf")

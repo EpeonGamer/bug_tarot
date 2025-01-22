@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseBug" load_steps=3 format=3 uid="uid://djhjcgtiaveb0"]
+
+[ext_resource type="Texture2D" uid="uid://c8ffrepas5tu2" path="res://icons/bug_icons/butterfly_progart.png" id="1_wie3t"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="2_xsg0x"]
+
+[resource]
+script = ExtResource("2_xsg0x")
+place_description = "Look at the top three cards of your deck and replace them at the top in any order."
+reactivate_description = "Choose any one card with the wrath psyche and discard it."
+name = "Butterfly"
+icon = ExtResource("1_wie3t")

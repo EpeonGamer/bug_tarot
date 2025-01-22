@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BaseElement" load_steps=3 format=3 uid="uid://bf58tj3ebxfu"]
+
+[ext_resource type="Texture2D" uid="uid://ctas17qbfp00b" path="res://icons/element_icons/fire_progart.png" id="1_pu2qm"]
+[ext_resource type="Script" path="res://resources/base_element.gd" id="2_bmt3p"]
+
+[resource]
+script = ExtResource("2_bmt3p")
+trigger_description = "This card would be affected by another card."
+action_description = "The same affect is also applied to the triggering card if applicable. This is limited to the triggering card, and is applied after the effects of the original card."
+name = "Fire"
+icon = ExtResource("1_pu2qm")

@@ -1,0 +1,77 @@
+[gd_scene load_steps=14 format=3 uid="uid://dup35s14g0wii"]
+
+[ext_resource type="Script" path="res://world_01.gd" id="1_817vc"]
+[ext_resource type="Texture2D" uid="uid://bloxkm5ydg8bl" path="res://icons/bug_icons/ant_progart.png" id="2_1ofh0"]
+[ext_resource type="Script" path="res://resources/base_bug.gd" id="3_iboxu"]
+[ext_resource type="Texture2D" uid="uid://hjng7mlmvatb" path="res://icons/psych_icons/wrath_progart.png" id="4_evs0l"]
+[ext_resource type="Texture2D" uid="uid://b3bk41kiddkfm" path="res://icons/element_icons/swarm_progart.png" id="4_m3pjn"]
+[ext_resource type="Script" path="res://resources/base_element.gd" id="5_o8w0a"]
+[ext_resource type="Script" path="res://resources/base_psyche.gd" id="7_cvlam"]
+[ext_resource type="Script" path="res://resources/base_card.gd" id="8_nwb0c"]
+[ext_resource type="PackedScene" uid="uid://dunha244gxv4u" path="res://ui_elements/card_container.tscn" id="9_vmpes"]
+
+[sub_resource type="Resource" id="Resource_hbjud"]
+script = ExtResource("3_iboxu")
+place_description = "Take all placed cards with the swarm element and add them to the top of your deck."
+reactivate_description = "Draw a card, and if you have less than 4 placed cards, you can place one card and use its 'place' effect."
+name = "Worm"
+icon = ExtResource("2_1ofh0")
+
+[sub_resource type="Resource" id="Resource_foqwd"]
+script = ExtResource("5_o8w0a")
+trigger_description = "Another swarm card is placed or reactivated by you, while this card is placed."
+action_description = "If no other swarm cards than the triggering cards of you have been reactivated this turn, this card can be reactivated."
+name = "Swarm"
+icon = ExtResource("4_m3pjn")
+
+[sub_resource type="Resource" id="Resource_2qeqv"]
+script = ExtResource("7_cvlam")
+condition_description = "Another player has discarded a card on your turn, and this card is placed."
+cost_description = "One other of your placed cards must be discarded."
+effect_description = "The reactivate effect of this card applies to one additional card."
+name = "Wrath"
+icon = ExtResource("4_evs0l")
+
+[sub_resource type="Resource" id="Resource_7jf0k"]
+script = ExtResource("8_nwb0c")
+bug_resource = SubResource("Resource_hbjud")
+element_resource = SubResource("Resource_foqwd")
+psyche_resource = SubResource("Resource_2qeqv")
+
+[node name="world_01" type="Node2D"]
+script = ExtResource("1_817vc")
+initial_card = SubResource("Resource_7jf0k")
+
+[node name="main_control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="main_background" type="ColorRect" parent="main_control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="card_ratio" parent="main_control" instance=ExtResource("9_vmpes")]
+unique_name_in_owner = true
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="cam_00" type="Camera2D" parent="."]

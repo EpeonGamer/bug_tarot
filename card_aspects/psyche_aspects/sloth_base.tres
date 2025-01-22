@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BasePsyche" load_steps=3 format=3 uid="uid://d26o7blu2arud"]
+
+[ext_resource type="Script" path="res://resources/base_psyche.gd" id="1_5w2kr"]
+[ext_resource type="Texture2D" uid="uid://c1gtku8mx2x5c" path="res://icons/psych_icons/sloth_progart.png" id="1_52uvh"]
+
+[resource]
+script = ExtResource("1_5w2kr")
+condition_description = "This card is not placed."
+cost_description = "This card must be discarded."
+effect_description = "Shuffle your hand into your deck, then draw up to two cards."
+name = "Sloth"
+icon = ExtResource("1_52uvh")
