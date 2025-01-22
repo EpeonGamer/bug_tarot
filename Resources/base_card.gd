@@ -1,9 +1,16 @@
 extends Resource
 class_name BaseCard
 
-var bug_type : Autoload.BUG_TYPE = Autoload.BUG_TYPE.WASP
-var element_type : Autoload.ELEMENT_TYPE = Autoload.ELEMENT_TYPE.BARRIER
-var psyche_type : Autoload.PSYCHE_TYPE = Autoload.PSYCHE_TYPE.SERVANT
+enum CARD_STATE{
+	DRAW,
+	HAND,
+	PLACED,
+	DISCARD
+}
+
+@export var bug_resource : BaseBug = BaseBug.new()
+@export var element_resource : BaseElement = BaseElement.new()
+@export var psyche_resource : BasePsyche = BasePsyche.new()
 
 var reactivated : bool = false
-var state : Autoload.CARD_STATE = Autoload.CARD_STATE.DRAW
+var state : CARD_STATE = CARD_STATE.DRAW
