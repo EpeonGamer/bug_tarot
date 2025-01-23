@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://r2j4pyse5q63"]
+[gd_scene load_steps=3 format=3 uid="uid://r2j4pyse5q63"]
 
 [ext_resource type="Script" path="res://world_02.gd" id="1_rnlbi"]
+[ext_resource type="PackedScene" uid="uid://bup0up7qgkru3" path="res://ui_elements/card_display_back.tscn" id="2_gxjsi"]
 
 [node name="world_02" type="Node2D"]
 script = ExtResource("1_rnlbi")
+testing = true
+hand_limit_test = 2
 
 [node name="cam_00" type="Camera2D" parent="."]
 
@@ -20,6 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 1
 
 [node name="main_background" type="ColorRect" parent="main_control"]
 layout_mode = 1
@@ -30,8 +34,53 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="CheckButton" type="CheckButton" parent="main_control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 132.0
+offset_bottom = 15.5
+grow_vertical = 2
+button_pressed = true
+text = "Stow Hand"
+
+[node name="player_draw_pile" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-450, 200)
+scale = Vector2(0.5, 0.5)
+
+[node name="draw_display" parent="player_draw_pile" instance=ExtResource("2_gxjsi")]
+unique_name_in_owner = true
+
+[node name="draw_click" parent="player_draw_pile" instance=ExtResource("2_gxjsi")]
+unique_name_in_owner = true
+selectable = true
+
+[node name="player_discard_pile" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(450, 200)
+scale = Vector2(0.5, 0.5)
+
+[node name="discard_display" parent="player_discard_pile" instance=ExtResource("2_gxjsi")]
+unique_name_in_owner = true
+
+[node name="discard_click" parent="player_discard_pile" instance=ExtResource("2_gxjsi")]
+unique_name_in_owner = true
+selectable = true
+
+[node name="player_placed" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 130)
+scale = Vector2(0.5, 0.5)
+
 [node name="player_hand" type="Node2D" parent="."]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(0, 200)
+position = Vector2(0, 380)
 scale = Vector2(0.6, 0.6)
+
+[connection signal="toggled" from="main_control/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="mouse_clicked" from="player_draw_pile/draw_click" to="." method="_on_draw_click_mouse_clicked"]
+[connection signal="mouse_clicked" from="player_discard_pile/discard_click" to="." method="_on_discard_click_mouse_clicked"]

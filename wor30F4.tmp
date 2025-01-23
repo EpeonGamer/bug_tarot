@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://r2j4pyse5q63"]
+
+[ext_resource type="Script" path="res://world_02.gd" id="1_rnlbi"]
+
+[node name="world_02" type="Node2D"]
+script = ExtResource("1_rnlbi")
+hand_limit_test = 12
+
+[node name="cam_00" type="Camera2D" parent="."]
+
+[node name="main_control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="main_background" type="ColorRect" parent="main_control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CheckButton" type="CheckButton" parent="main_control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.5
+offset_right = 132.0
+offset_bottom = 15.5
+grow_vertical = 2
+button_pressed = true
+text = "Stow Hand"
+
+[node name="player_placed" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 100)
+scale = Vector2(0.7, 0.7)
+
+[node name="player_hand" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(0, 350)
+scale = Vector2(0.6, 0.6)
+
+[connection signal="toggled" from="main_control/CheckButton" to="." method="_on_check_button_toggled"]

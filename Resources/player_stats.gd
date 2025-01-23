@@ -2,6 +2,7 @@ extends Resource
 class_name PlayerStats
 
 @export var player_name: String = "Epeon"
+var placed_limit : int = 3
 
 # Signals for card-related events
 signal card_moved(source_player: PlayerStats, source_name: String, target_player: PlayerStats, target_name: String, card: BaseCard)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1gtku8mx2x5c"
-path="res://.godot/imported/sloth_progart.png-3bf4b685c0c5bd2fe58e46f38532ba91.ctex"
+uid="uid://d3pfpo0p1k4oc"
+path="res://.godot/imported/servant_progart.png-2ee7de1391e65d1a741a012f8567ffd9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/psych_icons/sloth_progart.png"
-dest_files=["res://.godot/imported/sloth_progart.png-3bf4b685c0c5bd2fe58e46f38532ba91.ctex"]
+source_file="res://icons/psyche_icons/servant_progart.png"
+dest_files=["res://.godot/imported/servant_progart.png-2ee7de1391e65d1a741a012f8567ffd9.ctex"]
 
 [params]
 

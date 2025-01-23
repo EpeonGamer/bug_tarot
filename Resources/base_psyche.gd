@@ -7,4 +7,4 @@ class_name BasePsyche
 
 func _init() -> void:
 	name = "Wrath"
-	icon = load("res://icons/psych_icons/wrath_progart.png")
+	icon = load("res://icons/psyche_icons/wrath_progart.png")

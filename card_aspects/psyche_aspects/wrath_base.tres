@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BasePsyche" load_steps=3 format=3 uid="uid://c6eab088whlfa"]
 
 [ext_resource type="Script" path="res://resources/base_psyche.gd" id="1_pk5og"]
-[ext_resource type="Texture2D" uid="uid://hjng7mlmvatb" path="res://icons/psych_icons/wrath_progart.png" id="1_wgudf"]
+[ext_resource type="Texture2D" uid="uid://hjng7mlmvatb" path="res://icons/psyche_icons/wrath_progart.png" id="1_wgudf"]
 
 [resource]
 script = ExtResource("1_pk5og")

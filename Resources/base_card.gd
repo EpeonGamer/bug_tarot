@@ -37,3 +37,28 @@ func get_description() -> String:
 	
 	output += "[/color]"
 	return output
+
+func randomize_aspects() -> void:
+	var new_bug : BaseBug = null
+	var new_element : BaseElement = null
+	var new_psyche : BasePsyche = null
+	
+	var dir_name := "res://card_aspects/bug_aspects/"
+	var files := DirAccess.get_files_at(dir_name)
+	var random_index := randi_range(0,files.size() - 1)
+	new_bug = load(str(dir_name,files[random_index]))
+	
+	dir_name = "res://card_aspects/element_aspects/"
+	files = DirAccess.get_files_at(dir_name)
+	random_index = randi_range(0,files.size() - 1)
+	new_element = load(str(dir_name,files[random_index]))
+	
+	dir_name = "res://card_aspects/psyche_aspects/"
+	files = DirAccess.get_files_at(dir_name)
+	random_index = randi_range(0,files.size() - 1)
+	new_psyche = load(str(dir_name,files[random_index]))
+	
+	bug_resource = new_bug
+	element_resource = new_element
+	psyche_resource = new_psyche
+	pass

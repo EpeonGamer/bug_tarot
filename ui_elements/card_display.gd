@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_mouse_control_mouse_entered() -> void:
 	scale = Vector2(0.7,0.7)
-	position.y -= 200
+	position.y -= 100
 	z_index = 10
 	description.text = cur_card.get_description()
 	description.show()
@@ -34,7 +34,7 @@ func _on_mouse_control_mouse_entered() -> void:
 
 func _on_mouse_control_mouse_exited() -> void:
 	scale = Vector2(0.5,0.5)
-	position.y += 200
+	position.y += 100
 	z_index = 0
 	description.hide()
 
