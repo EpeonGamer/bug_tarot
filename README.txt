@@ -11,7 +11,11 @@
 3. All aspect (bug, element, psyche) descriptions terminate in full stops.
 # Coding
 ## TODO
-1. In `world_01`, set up a `card_container` for each card in the active hand dynamically. Rotate each slightly to simulate a held hand. Leave space to see the rest of the play area.
+1. Add visuals for:
+	1. Draw pile
+	2. Discard pile
+	3. Active cards
+	4. Hand and the above for other players
 2. Provide detection for which card is being hovered over, but only during that player's turn, unless it is a reactionary effect (`illusion`, `barrier`, `fire`).
 ## Action types
 1. Draw

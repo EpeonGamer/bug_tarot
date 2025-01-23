@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bug Tarot"
-run/main_scene="res://world_00.tscn"
+run/main_scene="res://world_02.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
