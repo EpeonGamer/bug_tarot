@@ -17,6 +17,8 @@ signal mouse_right_clicked(cur_card : CardDisplay)
 
 var description_offset : int = 250
 var description_width : int = 700
+var upside_down_offset : int = -1280 # viewport width
+var height_offset : int = -700
 
 func _ready() -> void:
 	scale = base_size_factor
@@ -42,6 +44,12 @@ func _on_mouse_control_mouse_entered() -> void:
 	z_index = 10
 	description.text = cur_card.get_description()
 	# align description
+	if (global_rotation_degrees >= 91) or (global_rotation_degrees <= -91):
+		description.rotation_degrees = 180
+		description.position.y = upside_down_offset
+	else:
+		description.rotation_degrees = 0
+		description.position.y = height_offset
 	if self.global_position.x > 0:
 		description.position.x = -description_offset - description_width
 	else:

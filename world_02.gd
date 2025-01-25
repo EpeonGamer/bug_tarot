@@ -4,10 +4,13 @@ var hand_hover_offset : int = 180
 
 #var players : Array = []
 var player_1 : PlayerStats = PlayerStats.new()
+var player_2 : PlayerStats = PlayerStats.new()
+
 var card_display := preload("res://ui_elements/card_display.tscn")
 
 #region Collection Elements
 @onready var player_display_1: PlayerDisplay = %player_display_1
+@onready var player_display_2: PlayerDisplay = %player_display_2
 
 #endregion
 
@@ -17,9 +20,17 @@ var card_display := preload("res://ui_elements/card_display.tscn")
 @export var placed_limit_test : int = 3
 @export var draw_limit_test : int = 3
 @export var discard_limit_test : int = 3
+
+@export var p2_discard_limit_test : int = 3
+@export var p2_placed_limit_test : int = 3
+@export var p2_draw_limit_test : int = 3
+@export var p2_hand_limit_test : int = 3
 #endregion
 
 func _ready() -> void:
+	update_other_player(2)
+	
+	
 	if testing:
 		run_test_player_1()
 	
@@ -32,6 +43,7 @@ func run_test_player_1() -> void:
 	card2.element_resource = load("res://card_aspects/element_aspects/fire_base.tres")
 	card2.psyche_resource = load("res://card_aspects/psyche_aspects/sloth_base.tres")
 	
+#region Player 1
 	for i in hand_limit_test:
 		card2 = card2.duplicate(true)
 		player_1.hand.append(card2)
@@ -53,11 +65,39 @@ func run_test_player_1() -> void:
 		i.randomize_aspects()
 	for i : BaseCard in player_1.discard_pile:
 		i.randomize_aspects()
-	
+		
 	display_hand(player_1,player_display_1)
 	display_placed(player_1,player_display_1)
 	arrange_draw_pile(player_1, player_display_1)
 	arrange_discard_pile(player_1, player_display_1)
+#endregion
+		
+#region Player 2
+	for i in p2_discard_limit_test:
+		card2 = card2.duplicate(true)
+		player_2.discard_pile.append(card2)
+	for i in p2_draw_limit_test:
+		card2 = card2.duplicate(true)
+		player_2.draw_pile.append(card2)
+	for i in p2_placed_limit_test:
+		card2 = card2.duplicate(true)
+		player_2.placed_cards.append(card2)
+	for i in p2_hand_limit_test:
+		card2 = card2.duplicate(true)
+		player_2.hand.append(card2)
+		
+	for i : BaseCard in player_2.discard_pile:
+		i.randomize_aspects()
+	for i : BaseCard in player_2.draw_pile:
+		i.randomize_aspects()
+	for i : BaseCard in player_2.placed_cards:
+		i.randomize_aspects()
+	for i : BaseCard in player_2.hand:
+		i.randomize_aspects()
+		
+	update_other_player(2)
+	player_1.all_discard_amt_granted = 2
+#endregion	
 #endregion
 
 #region Display Hand/Placed
@@ -128,10 +168,10 @@ func arrange_pile(pile : Array, display : Node2D, click : Node2D) -> void:
 		click.hide()
 
 func arrange_draw_pile(player_stats: PlayerStats, player_display : PlayerDisplay) -> void:
-	arrange_pile(player_stats.draw_pile, player_display.draw_display, player_display_1.draw_click)
+	arrange_pile(player_stats.draw_pile, player_display.draw_display, player_display.draw_click)
 
 func arrange_discard_pile(player_stats: PlayerStats, player_display : PlayerDisplay) -> void:
-	arrange_pile(player_stats.discard_pile, player_display.discard_display, player_display_1.discard_click)
+	arrange_pile(player_stats.discard_pile, player_display.discard_display, player_display.discard_click)
 
 #endregion
 
@@ -180,5 +220,29 @@ func _on_player_display_1_draw_pile_clicked() -> void:
 
 
 func _on_player_display_2_discard_pile_clicked() -> void:
-	pass # Replace with function body.
-	#TODO check if this player (player_1) can take cards from the discard pile of this player (or any players)
+	var cur_player = player_1
+	#check if this player (player_1) can take cards from the discard pile of this player (or any players)
+	#ordered from specific and required to general granted
+	# Update discard amounts, see process discard function
+	cur_player.other_discard_amt_required = process_discard(cur_player.other_discard_amt_required, player_2, player_1, player_display_2, player_display_1)
+	cur_player.all_discard_amt_required = process_discard(cur_player.all_discard_amt_required, player_2, player_1, player_display_2, player_display_1)
+	cur_player.other_discard_amt_granted = process_discard(cur_player.other_discard_amt_granted, player_2, player_1, player_display_2, player_display_1)
+	cur_player.all_discard_amt_granted = process_discard(cur_player.all_discard_amt_granted, player_2, player_1, player_display_2, player_display_1)
+
+# Consolidated function to handle discard checks, returns new value for discard amts
+func process_discard(amount, player_2, player_1, player_display_2, player_display_1):
+	if amount > 0:
+		player_2.move_cards(player_2, "discard_pile", player_1, "hand", 1, false)
+		arrange_discard_pile(player_2, player_display_2)
+		display_hand(player_1, player_display_1)
+		return amount - 1
+	return amount
+
+
+func update_other_player(player_num : int):
+	match player_num:
+		2:
+			display_hand(player_2, player_display_2)
+			display_placed(player_2,player_display_2)
+			arrange_discard_pile(player_2,player_display_2)
+			arrange_draw_pile(player_2,player_display_2)

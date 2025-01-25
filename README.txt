@@ -16,6 +16,7 @@
 3. Button to shuffle draw pile
 4. Provide detection for which card is being hovered over, but only during that player's turn, unless it is a reactionary effect (`illusion`, `barrier`, `fire`).
 	1. Highlight cards for interaction (when only applies to those cards)
+5. Show info on card moves granted/required (separate menu probs)
 ## Action types
 1. Draw
 	1. If cards are available to draw from
