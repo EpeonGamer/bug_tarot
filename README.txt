@@ -11,12 +11,11 @@
 3. All aspect (bug, element, psyche) descriptions terminate in full stops.
 # Coding
 ## TODO
-1. Add visuals for:
-	1. Draw pile
-	2. Discard pile
-	3. Active cards
-	4. Hand and the above for other players
-2. Provide detection for which card is being hovered over, but only during that player's turn, unless it is a reactionary effect (`illusion`, `barrier`, `fire`).
+1. See code #TODOs
+2. Button to shuffle discard pile back into draw pile
+3. Button to shuffle draw pile
+4. Provide detection for which card is being hovered over, but only during that player's turn, unless it is a reactionary effect (`illusion`, `barrier`, `fire`).
+	1. Highlight cards for interaction (when only applies to those cards)
 ## Action types
 1. Draw
 	1. If cards are available to draw from

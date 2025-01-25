@@ -40,7 +40,7 @@ enum CARD_STATE{
 	DISCARD,
 }
 
-func get_bug_icon(index : BUG_TYPE = 0) -> Texture:
+func get_bug_icon(index : BUG_TYPE = BUG_TYPE.WASP) -> Texture:
 	var output : Texture = null
 	match index:
 		BUG_TYPE.WASP:
@@ -50,7 +50,7 @@ func get_bug_icon(index : BUG_TYPE = 0) -> Texture:
 	return output
 	
 
-func get_element_icon(index : ELEMENT_TYPE = 0) -> Texture:
+func get_element_icon(index : ELEMENT_TYPE = ELEMENT_TYPE.BARRIER) -> Texture:
 	var output : Texture = null
 	match index:
 		ELEMENT_TYPE.BARRIER:
@@ -58,7 +58,7 @@ func get_element_icon(index : ELEMENT_TYPE = 0) -> Texture:
 	return output
 	
 
-func get_psyche_icon(index : PSYCHE_TYPE = 0) -> Texture:
+func get_psyche_icon(index : PSYCHE_TYPE = PSYCHE_TYPE.SERVANT) -> Texture:
 	var output : Texture = null
 	match index:
 		PSYCHE_TYPE.SERVANT:

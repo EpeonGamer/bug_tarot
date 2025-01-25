@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_0o6kk")
 trigger_description = "Another swarm card is placed or reactivated by you, while this card is placed."
-action_description = "If no other swarm cards than the triggering cards of you have been reactivated this turn, this card can be reactivated."
+action_description = "If no other of your swarm cards than the triggering cards have been reactivated this turn, this card can be reactivated."
 name = "Swarm"
 icon = ExtResource("1_yocu0")

@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://oe6cqwtqr1jc"]
+
+[ext_resource type="Script" path="res://ui_elements/player_display_1.gd" id="1_3y8ki"]
+[ext_resource type="PackedScene" uid="uid://bup0up7qgkru3" path="res://ui_elements/card_display_back.tscn" id="1_cq2fl"]
+
+[node name="player_display_1" type="Node2D"]
+script = ExtResource("1_3y8ki")
+
+[node name="player_draw_pile" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(540, 170)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+
+[node name="draw_display" parent="player_draw_pile" instance=ExtResource("1_cq2fl")]
+unique_name_in_owner = true
+
+[node name="draw_click" parent="player_draw_pile" instance=ExtResource("1_cq2fl")]
+unique_name_in_owner = true
+position = Vector2(-10, 10)
+selectable = true
+
+[node name="player_discard_pile" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(540, 290)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+
+[node name="discard_display" parent="player_discard_pile" instance=ExtResource("1_cq2fl")]
+unique_name_in_owner = true
+
+[node name="discard_click" parent="player_discard_pile" instance=ExtResource("1_cq2fl")]
+unique_name_in_owner = true
+position = Vector2(-10, 10)
+selectable = true
+
+[node name="player_placed" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(220, 150)
+scale = Vector2(0.5, 0.5)
+
+[node name="player_hand" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(220, 400)
+scale = Vector2(0.5, 0.5)
+
+[connection signal="mouse_clicked" from="player_draw_pile/draw_click" to="." method="_on_draw_click_mouse_clicked"]
+[connection signal="mouse_clicked" from="player_discard_pile/discard_click" to="." method="_on_discard_click_mouse_clicked"]

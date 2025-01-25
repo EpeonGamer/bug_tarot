@@ -1,6 +1,9 @@
 extends Node2D
 class_name CardDisplay
 
+signal mouse_clicked(cur_card : CardDisplay)
+signal mouse_right_clicked(cur_card : CardDisplay)
+
 @onready var bug_sprite: Sprite2D = %bug_sprite
 @onready var element_sprite: Sprite2D = %element_sprite
 @onready var psyche_sprite: Sprite2D = %psyche_sprite
@@ -8,9 +11,18 @@ class_name CardDisplay
 
 @export var cur_card : BaseCard
 
+@export var hover_size_factor : Vector2 = Vector2(0.8,0.8)
+@export var base_size_factor : Vector2 = Vector2(0.5,0.5)
+@export var hover_displace_amt : int = 60
+
+var description_offset : int = 250
+var description_width : int = 700
+
 func _ready() -> void:
+	scale = base_size_factor
 	update_icons()
 	description.hide()
+	description.size.x = description_width
 
 func set_card(new_card : BaseCard) -> void:
 	cur_card = new_card
@@ -20,21 +32,26 @@ func update_icons() -> void:
 	element_sprite.texture = cur_card.element_resource.icon
 	psyche_sprite.texture = cur_card.psyche_resource.icon
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	pass
 
 
 func _on_mouse_control_mouse_entered() -> void:
-	scale = Vector2(0.7,0.7)
-	position.y -= 100
+	scale = hover_size_factor
+	global_position.y -= hover_displace_amt
 	z_index = 10
 	description.text = cur_card.get_description()
+	# align description
+	if self.global_position.x > 0:
+		description.position.x = -description_offset - description_width
+	else:
+		description.position.x = description_offset
 	description.show()
 
 
 func _on_mouse_control_mouse_exited() -> void:
-	scale = Vector2(0.5,0.5)
-	position.y += 100
+	scale = base_size_factor
+	global_position.y += hover_displace_amt
 	z_index = 0
 	description.hide()
 
@@ -43,6 +60,6 @@ func _on_mouse_control_mouse_exited() -> void:
 func _on_mouse_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			print(cur_card.bug_resource)
+			mouse_clicked.emit(self)
 		elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-			print(cur_card.get_description())
+			mouse_right_clicked.emit(self)

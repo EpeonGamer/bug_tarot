@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_bmt3p")
 trigger_description = "This card would be affected by another card."
-action_description = "The same affect is also applied to the triggering card if applicable. This is limited to the triggering card, and is applied after the effects of the original card."
+action_description = "The same effect is also applied to the triggering card if applicable. This is limited to the triggering card, and is applied after the effects of the original card."
 name = "Fire"
 icon = ExtResource("1_pu2qm")
