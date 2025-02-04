@@ -11,6 +11,7 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("1_vep82")
 
 [node name="border_color" type="ColorRect" parent="."]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

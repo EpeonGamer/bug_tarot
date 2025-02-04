@@ -8,6 +8,7 @@ signal mouse_right_clicked(cur_card : CardDisplay)
 @onready var element_sprite: Sprite2D = %element_sprite
 @onready var psyche_sprite: Sprite2D = %psyche_sprite
 @onready var description: RichTextLabel = %description
+@onready var border_color: ColorRect = %border_color
 
 @export var cur_card : BaseCard
 
@@ -19,6 +20,8 @@ var description_offset : int = 250
 var description_width : int = 700
 var upside_down_offset : int = -1280 # viewport width
 var height_offset : int = -700
+
+var selected : bool = false
 
 func _ready() -> void:
 	scale = base_size_factor
@@ -64,10 +67,21 @@ func _on_mouse_control_mouse_exited() -> void:
 	description.hide()
 
 
-
 func _on_mouse_control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			mouse_clicked.emit(self)
+			#mouse_clicked.emit(self)
+			toggle_selected()
 		elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 			mouse_right_clicked.emit(self)
+
+func toggle_selected():
+	if not selected:
+		#check if maximum selection amoutn given context is reached yet
+		border_color.color = Color.ORANGE
+		selected = true
+		add_to_group("selected")
+	else:
+		border_color.color = Color.hex(0x171717ff)
+		selected = false
+		remove_from_group("selected")
