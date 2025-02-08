@@ -29,28 +29,7 @@ var card_display := preload("res://ui_elements/card_display.tscn")
 #endregion
 
 #region Statemachine vars
-#req is required
-#opt is optional
 
-#var draw_own_cards_req : int = 0
-var draw_own_cards_opt : int = 0
-#var draw_other_cards_req : int = 0
-#var draw_other_cards_opt : int = 0
-
-#var discard_own_cards_req : int = 0
-var discard_own_cards_opt : int = 0
-#var discard_other_cards_req : int = 0
-var discard_other_cards_opt : int = 0
-
-#var take_to_hand_own_cards_req : int = 0
-var take_to_hand_own_cards_opt : int = 0
-#var take_to_hand_other_cards_req : int = 0
-var take_to_hand_other_cards_opt : int = 0
-
-#var place_own_cards_req : int = 0
-var place_own_cards_opt : int = 0
-#var place_other_cards_req : int = 0
-#var place_other_cards_opt : int = 0
 #endregion
 
 func _ready() -> void:
@@ -125,7 +104,7 @@ func run_test_player_1() -> void:
 #endregion
 
 #region Statemachine
-
+var action_queue : Array = []
 #endregion
 
 #region Display Hand/Placed
