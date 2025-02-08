@@ -29,14 +29,18 @@ var card_display := preload("res://ui_elements/card_display.tscn")
 #endregion
 
 #region Statemachine vars
-
+var action_queue : Array = []
+var state : ActionElement = ActionElement.new()
 #endregion
 
 func _ready() -> void:
+	reset_for_turn_start()
+	
 	update_other_player(2)
 	
 	if testing:
 		run_test_player_1()
+		player_2.player_name = "Voidd"
 	
 
 #region Testing functions
@@ -63,6 +67,9 @@ func run_test_player_1() -> void:
 		
 	for i : BaseCard in player_1.hand:
 		i.randomize_aspects()
+		var element : ActionElement =  ActionElement.new()
+		element.action_type = Autoload.ACTION_TYPE.PLACE
+		i.bug_resource.place_action = element
 	for i : BaseCard in player_1.placed_cards:
 		i.randomize_aspects()
 	for i : BaseCard in player_1.draw_pile:
@@ -103,12 +110,11 @@ func run_test_player_1() -> void:
 #endregion	
 #endregion
 
-#region Statemachine
-var action_queue : Array = []
-#endregion
-
 #region Display Hand/Placed
 func display_cards(container: Node2D, cards: Array, on_card_clicked: Callable) -> void:
+	# Clear seleted selection
+	clear_selected()
+	
 	# Clear the container
 	for i in range(container.get_child_count() - 1):
 		container.get_children()[i].queue_free()
@@ -121,6 +127,8 @@ func display_cards(container: Node2D, cards: Array, on_card_clicked: Callable) -
 		new_card_cont.set_card(card)
 		new_card_cont.mouse_clicked.connect(on_card_clicked)
 		new_card_cont.mouse_right_clicked.connect(_on_face_card_right_clicked) #consider parameter for assigning
+		new_card_cont.player_name = player_1.player_name
+		
 		container.add_child(new_card_cont)
 		
 
@@ -133,6 +141,12 @@ func display_hand(player_stats: PlayerStats, player_display : PlayerDisplay) -> 
 func display_placed(player_stats: PlayerStats, player_display : PlayerDisplay) -> void:
 	display_cards(player_display.player_placed, player_stats.placed_cards, _on_face_card_clicked)
 	arrange_placed(player_display)
+
+func clear_selected() -> void:
+	for i : CardDisplay in get_tree().get_nodes_in_group("selected"):
+		i.toggle_selected()
+		
+
 #endregion
 
 
@@ -192,6 +206,49 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_focus_next"):
 		$main_control/CheckButton.set("button_pressed",!$main_control/CheckButton.button_pressed)
+		
+	# Place selected card
+	# Check if card can be placed, statemachine compatible, etc. etc.
+	if Input.is_action_just_pressed("ui_page_up") and ((state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0) or not player_1.default_card_placed):
+			#get player by name function called here
+			var selected_cards : Array = get_tree().get_nodes_in_group("selected")
+			if selected_cards:
+				var card : CardDisplay = selected_cards[selected_cards.size()-1]
+				if card.player_name == player_1.player_name:
+					if card.cur_card.cur_location == Autoload.CARD_LOCATION.HAND:
+						action_queue.append(card.cur_card.bug_resource.place_action.duplicate())
+						player_1.transfer_card(player_1,"hand",player_1,"placed_cards",card.cur_card)
+						display_hand(player_1,player_display_1)
+						display_placed(player_1,player_display_1)
+						
+						if state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0:
+							# NOT CURRENTLY ABLE TO HANDLE MULTIPLE SIMULTANEOUSLY PLACED CARDS
+							state.number -= 1
+							step_action_queue()
+						else:
+							player_1.default_card_placed = true
+							step_action_queue()
+						print(state)
+				else:
+					print("Not your card!")
+#endregion
+
+
+#region Statemachine
+func step_action_queue()->void:
+	change_state(action_queue.pop_front())
+
+func change_state(action: ActionElement)->void:
+	state = action
+#endregion
+
+#region Turn handler
+func reset_for_turn_start() -> void:
+	player_1.default_card_discarded = false
+	player_1.default_card_placed = false
+	player_1.default_card_reactvated = false
+	state = ActionElement.new()
+	state.number = 0
 #endregion
 
 #region Own cards clicked
@@ -216,12 +273,14 @@ func _on_face_card_right_clicked(cur_card : CardDisplay) -> void:
 
 
 func _on_player_hand_1_discard_pile_clicked() -> void:
+	#TODO Test free discard or state
 	player_1.move_cards(player_1,"discard_pile",player_1,"hand",1,false)
 	arrange_discard_pile(player_1, player_display_1)
 	display_hand(player_1,player_display_1)
 
 
 func _on_player_display_1_draw_pile_clicked() -> void:
+	#TODO Test hand empty at round start (queue empty?) or state
 	player_1.draw_cards(1,false)
 	arrange_draw_pile(player_1, player_display_1)
 	display_hand(player_1,player_display_1)

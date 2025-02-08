@@ -1,5 +1,12 @@
 extends Node
 
+enum CARD_LOCATION{
+	DRAW,
+	HAND,
+	PLACED,
+	DISCARD
+}
+
 enum ASPECT_TYPE{
 	BUG,
 	ELEMENT,

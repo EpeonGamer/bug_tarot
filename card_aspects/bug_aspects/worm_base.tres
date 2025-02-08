@@ -9,3 +9,4 @@ place_description = "Swap any held hand with that of another player."
 reactivate_description = "Swap any held card with one of another player."
 name = "Worm"
 icon = ExtResource("1_lnylm")
+aspect_type = 0

@@ -12,6 +12,13 @@ signal cards_moved(source_player: PlayerStats, source_name: String, target_playe
 
 var handler : ClientsideCardHandler = null
 
+#default without playing cards, once per round
+var default_card_placed : bool = false
+var default_card_reactvated : bool = false
+var default_card_discarded : bool = false
+
+#default without playing cards, once per player turn
+
 #region Card Collections
 var draw_pile: Array = []
 var hand: Array = []

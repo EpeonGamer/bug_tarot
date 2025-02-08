@@ -24,6 +24,8 @@ var height_offset : int = -700
 
 var selected : bool = false
 
+var player_name : String = ""
+
 func _ready() -> void:
 	scale = base_size_factor
 	update_icons()
