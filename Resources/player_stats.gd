@@ -8,32 +8,13 @@ class_name PlayerStats
 signal card_moved(source_player: PlayerStats, source_name: String, target_player: PlayerStats, target_name: String, card: BaseCard)
 signal cards_moved(source_player: PlayerStats, source_name: String, target_player: PlayerStats, target_name: String, cards: Array)
 
+var handler : ClientsideCardHandler = null
+
 #region Card Collections
 var draw_pile: Array = []
 var hand: Array = []
 var placed_cards: Array = []
 var discard_pile: Array = []
-#endregion
-
-#region Functional Checks
-#TODO introduce swap state
-#(choose card, required for move card back to hand as well, and which cards another player has to discard)
-#and hand reveal state since those are special cases not otherwise handled by simple card moving
-#also checks for if other player limits are for one or all players, control somehow
-#region Discard Piles
-# required limited by amount player has
-var self_discard_amt_required : int = 0 #required to discard before end of turn/card sub-action, this player chooses which cards
-var self_discard_amt_granted : int = 0 #optional to discard before end of turn/card sub-action, this player chooses which cards
-var all_discard_amt_required : int = 0 #required to discard before end of turn/card sub-action, includes other players
-var all_discard_amt_granted : int = 0 #optional to discard before end of turn/card sub-action, includes other players
-var other_discard_amt_required : int = 0 #required to discard before end of turn/card sub-action,limited to other players
-var other_discard_amt_granted : int = 0 #optional to discard before end of turn/card sub-action,limited to other players
-#endregion
-#region Draw Pile
-# required limited by amount player has
-var self_draw_amt_required : int = 0 # required to draw before end of turn/card sub-action
-var self_draw_amt_granted : int = 0 # optional to draw before end of turn/card sub-action
-#endregion
 #endregion
 
 #region Generalized Card Movement

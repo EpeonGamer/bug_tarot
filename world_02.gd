@@ -1,4 +1,5 @@
 extends Node2D
+class_name  ClientsideCardHandler
 
 var hand_hover_offset : int = 180
 
@@ -187,6 +188,7 @@ func _input(_event: InputEvent) -> void:
 		$main_control/CheckButton.set("button_pressed",!$main_control/CheckButton.button_pressed)
 #endregion
 
+#region Own cards clicked
 
 func _on_face_card_clicked(cur_card : CardDisplay) -> void:
 	match cur_card.get_parent():
@@ -217,6 +219,7 @@ func _on_player_display_1_draw_pile_clicked() -> void:
 	player_1.draw_cards(1,false)
 	arrange_draw_pile(player_1, player_display_1)
 	display_hand(player_1,player_display_1)
+#endregion
 
 
 func _on_player_display_2_discard_pile_clicked() -> void:
@@ -239,6 +242,7 @@ func process_discard(amount, player_2, player_1, player_display_2, player_displa
 	return amount
 
 
+#region Other player display
 func update_other_player(player_num : int):
 	match player_num:
 		2:
@@ -246,3 +250,4 @@ func update_other_player(player_num : int):
 			display_placed(player_2,player_display_2)
 			arrange_discard_pile(player_2,player_display_2)
 			arrange_draw_pile(player_2,player_display_2)
+#endregion
