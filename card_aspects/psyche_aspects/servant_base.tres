@@ -10,3 +10,4 @@ cost_description = "Choose one of your placed cards and move it to another playe
 effect_description = "You may place an additional card this turn, triggering its \"place\" ability."
 name = "Servant"
 icon = ExtResource("1_m8jjq")
+aspect_type = 2

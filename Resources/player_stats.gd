@@ -5,7 +5,9 @@ class_name PlayerStats
 #var placed_limit : int = 3
 
 # Signals for card-related events
+@warning_ignore("unused_signal")
 signal card_moved(source_player: PlayerStats, source_name: String, target_player: PlayerStats, target_name: String, card: BaseCard)
+@warning_ignore("unused_signal")
 signal cards_moved(source_player: PlayerStats, source_name: String, target_player: PlayerStats, target_name: String, cards: Array)
 
 var handler : ClientsideCardHandler = null

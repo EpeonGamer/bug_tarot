@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://coxk34se51fh5"]
+
+[ext_resource type="Texture2D" uid="uid://bloxkm5ydg8bl" path="res://icons/bug_icons/ant_progart.png" id="1_nrd40"]
+[ext_resource type="Script" path="res://ui_elements/card_display.gd" id="1_vep82"]
+[ext_resource type="Texture2D" uid="uid://cbrtnj61w8hgx" path="res://icons/element_icons/barrier_progart.png" id="2_0hygp"]
+[ext_resource type="Texture2D" uid="uid://d3pfpo0p1k4oc" path="res://icons/psyche_icons/servant_progart.png" id="3_iqtlf"]
+[ext_resource type="FontFile" uid="uid://df3dg6wkakrcy" path="res://assets/fonts/NK57 Monospace Se Bd.otf" id="5_d0yc1"]
+
+[node name="CardDisplay" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_vep82")
+
+[node name="border_color" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -360.0
+offset_right = 220.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="background_color" type="ColorRect" parent="border_color"]
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 720.0
+scale = Vector2(0.94, 0.96)
+pivot_offset = Vector2(215, 360)
+color = Color(0.466667, 0.466667, 0.466667, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="bug_sprite" type="Sprite2D" parent="border_color"]
+unique_name_in_owner = true
+position = Vector2(220, 360)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_nrd40")
+
+[node name="bug_bg" type="ColorRect" parent="border_color/bug_sprite"]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = -250.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="element_sprite" type="Sprite2D" parent="border_color"]
+unique_name_in_owner = true
+position = Vector2(84, 92)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_0hygp")
+
+[node name="element_bg" type="ColorRect" parent="border_color/element_sprite"]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = -250.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="psyche_sprite" type="Sprite2D" parent="border_color"]
+unique_name_in_owner = true
+position = Vector2(358, 626)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_iqtlf")
+
+[node name="psyche_bg" type="ColorRect" parent="border_color/psyche_sprite"]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = -250.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="mouse_control" type="Control" parent="."]
+custom_minimum_size = Vector2(440, 720)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -360.0
+offset_right = 215.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+offset_left = 250.0
+offset_top = -700.0
+offset_right = 900.0
+offset_bottom = -356.0
+pivot_offset = Vector2(-250, 700)
+theme_override_constants/line_separation = 1
+theme_override_fonts/normal_font = ExtResource("5_d0yc1")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[font_size=64]LOREM IPSUM[/font_size]\\n
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+fit_content = true
+scroll_active = false
+
+[node name="text_bg" type="ColorRect" parent="description"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[connection signal="gui_input" from="mouse_control" to="." method="_on_mouse_control_gui_input"]
+[connection signal="mouse_entered" from="mouse_control" to="." method="_on_mouse_control_mouse_entered"]
+[connection signal="mouse_exited" from="mouse_control" to="." method="_on_mouse_control_mouse_exited"]

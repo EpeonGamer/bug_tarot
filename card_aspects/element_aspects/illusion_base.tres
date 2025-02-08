@@ -9,3 +9,4 @@ trigger_description = "The illusion card is not placed and any placed card would
 action_description = "You can swap the illusion card with the affected card, instead applying the affect to the illusion card. Swapping with an opponent's card gives them control of this card."
 name = "Illusion"
 icon = ExtResource("1_veipv")
+aspect_type = 1

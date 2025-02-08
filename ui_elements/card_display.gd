@@ -1,6 +1,7 @@
 extends Node2D
 class_name CardDisplay
 
+@warning_ignore("unused_signal")
 signal mouse_clicked(cur_card : CardDisplay)
 signal mouse_right_clicked(cur_card : CardDisplay)
 

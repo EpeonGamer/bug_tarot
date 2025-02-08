@@ -10,3 +10,4 @@ cost_description = "This card must be discarded."
 effect_description = "Shuffle your hand into your deck, then draw up to two cards."
 name = "Sloth"
 icon = ExtResource("1_52uvh")
+aspect_type = 2

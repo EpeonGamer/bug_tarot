@@ -9,3 +9,4 @@ trigger_description = "The barrier card is placed and another placed card would 
 action_description = "The other card is unaffected and the effect applies to the barrier card instead."
 name = "Barrier"
 icon = ExtResource("1_gujps")
+aspect_type = 1

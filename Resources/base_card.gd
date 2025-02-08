@@ -1,12 +1,12 @@
 extends Resource
 class_name BaseCard
 
-#enum CARD_STATE{
-	#DRAW,
-	#HAND,
-	#PLACED,
-	#DISCARD
-#}
+enum CARD_LOCATION{
+	DRAW,
+	HAND,
+	PLACED,
+	DISCARD
+}
 
 var heading_size : int = 40
 var subheading_size : int = 28
@@ -17,7 +17,7 @@ var text_size : int = 24
 @export var psyche_resource : BasePsyche = BasePsyche.new()
 
 var reactivated : bool = false
-#var state : CARD_STATE = CARD_STATE.DRAW
+var cur_location : CARD_LOCATION = CARD_LOCATION.HAND
 
 
 func get_description() -> String:

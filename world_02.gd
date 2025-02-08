@@ -28,9 +28,33 @@ var card_display := preload("res://ui_elements/card_display.tscn")
 @export var p2_hand_limit_test : int = 3
 #endregion
 
+#region Statemachine vars
+#req is required
+#opt is optional
+
+#var draw_own_cards_req : int = 0
+var draw_own_cards_opt : int = 0
+#var draw_other_cards_req : int = 0
+#var draw_other_cards_opt : int = 0
+
+#var discard_own_cards_req : int = 0
+var discard_own_cards_opt : int = 0
+#var discard_other_cards_req : int = 0
+var discard_other_cards_opt : int = 0
+
+#var take_to_hand_own_cards_req : int = 0
+var take_to_hand_own_cards_opt : int = 0
+#var take_to_hand_other_cards_req : int = 0
+var take_to_hand_other_cards_opt : int = 0
+
+#var place_own_cards_req : int = 0
+var place_own_cards_opt : int = 0
+#var place_other_cards_req : int = 0
+#var place_other_cards_opt : int = 0
+#endregion
+
 func _ready() -> void:
 	update_other_player(2)
-	
 	
 	if testing:
 		run_test_player_1()
@@ -97,8 +121,11 @@ func run_test_player_1() -> void:
 		i.randomize_aspects()
 		
 	update_other_player(2)
-	player_1.all_discard_amt_granted = 2
 #endregion	
+#endregion
+
+#region Statemachine
+
 #endregion
 
 #region Display Hand/Placed
@@ -222,6 +249,7 @@ func _on_player_display_1_draw_pile_clicked() -> void:
 #endregion
 
 
+#region cross-player discard
 func _on_player_display_2_discard_pile_clicked() -> void:
 	var cur_player = player_1
 	#check if this player (player_1) can take cards from the discard pile of this player (or any players)
@@ -233,13 +261,14 @@ func _on_player_display_2_discard_pile_clicked() -> void:
 	cur_player.all_discard_amt_granted = process_discard(cur_player.all_discard_amt_granted, player_2, player_1, player_display_2, player_display_1)
 
 # Consolidated function to handle discard checks, returns new value for discard amts
-func process_discard(amount, player_2, player_1, player_display_2, player_display_1):
+func process_discard(amount, player_2_stats, player_1_stats, player_display_2_ref, player_display_1_ref):
 	if amount > 0:
-		player_2.move_cards(player_2, "discard_pile", player_1, "hand", 1, false)
-		arrange_discard_pile(player_2, player_display_2)
-		display_hand(player_1, player_display_1)
+		player_2_stats.move_cards(player_2_stats, "discard_pile", player_1_stats, "hand", 1, false)
+		arrange_discard_pile(player_2_stats, player_display_2_ref)
+		display_hand(player_1_stats, player_display_1_ref)
 		return amount - 1
 	return amount
+#endregion
 
 
 #region Other player display
