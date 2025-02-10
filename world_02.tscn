@@ -6,8 +6,9 @@
 [node name="world_02" type="Node2D"]
 script = ExtResource("1_rnlbi")
 testing = true
+hand_limit_test = 0
 placed_limit_test = 0
-draw_limit_test = 6
+draw_limit_test = 9
 discard_limit_test = 0
 
 [node name="cam_00" type="Camera2D" parent="."]

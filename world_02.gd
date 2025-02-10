@@ -288,12 +288,11 @@ func _on_player_hand_1_discard_pile_clicked() -> void:
 
 
 func _on_player_display_1_draw_pile_clicked() -> void:
-	#TODO Test hand empty at round start (queue empty?) or state
 	#TODO Draw amt control
 	if (state.action_type == Autoload.ACTION_TYPE.DRAW) and (state.number != 0):
 		player_1.draw_cards(state.number,false)
 		step_action_queue()
-	elif player_1.hand.is_empty():
+	elif player_1.hand.is_empty() and action_queue.is_empty(): #empty action_queue means turn start
 		player_1.draw_cards(2,false)
 	#TODO "deny" sfx when neither of above applies
 	arrange_draw_pile(player_1, player_display_1)
