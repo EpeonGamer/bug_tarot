@@ -221,7 +221,7 @@ func _input(_event: InputEvent) -> void:
 						display_hand(player_1,player_display_1)
 						display_placed(player_1,player_display_1)
 						
-						if state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0:
+						if (state.action_type == Autoload.ACTION_TYPE.PLACE and state.player_type == Autoload.PLAYER_TYPE.SELF) and state.number > 0:
 							# NOT CURRENTLY ABLE TO HANDLE MULTIPLE SIMULTANEOUSLY PLACED CARDS
 							state.number -= 1
 							step_action_queue()
@@ -289,7 +289,7 @@ func _on_player_hand_1_discard_pile_clicked() -> void:
 
 func _on_player_display_1_draw_pile_clicked() -> void:
 	#TODO Draw amt control
-	if (state.action_type == Autoload.ACTION_TYPE.DRAW) and (state.number != 0):
+	if (state.action_type == Autoload.ACTION_TYPE.DRAW and state.player_type == Autoload.PLAYER_TYPE.SELF) and (state.number != 0):
 		player_1.draw_cards(state.number,false)
 		step_action_queue()
 	elif player_1.hand.is_empty() and action_queue.is_empty(): #empty action_queue means turn start
