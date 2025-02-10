@@ -22,5 +22,6 @@ enum ACTION_TYPE{
 
 enum PLAYER_TYPE{
 	SELF,
-	OTHER
+	OTHER,
+	ANY #not supported at time of writing
 }

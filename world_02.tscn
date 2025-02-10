@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://r2j4pyse5q63"]
+[gd_scene load_steps=7 format=3 uid="uid://r2j4pyse5q63"]
 
 [ext_resource type="Script" path="res://world_02.gd" id="1_rnlbi"]
 [ext_resource type="PackedScene" uid="uid://oe6cqwtqr1jc" path="res://ui_elements/player_display_1.tscn" id="2_gj5ao"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivf0x"]
+bg_color = Color(0.733333, 0.733333, 0.733333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63yo5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2u6d"]
+bg_color = Color(0.733333, 0.733333, 0.733333, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2ck1"]
+bg_color = Color(0.466667, 0.466667, 0.466667, 1)
 
 [node name="world_02" type="Node2D"]
 script = ExtResource("1_rnlbi")
@@ -37,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="CheckButton" type="CheckButton" parent="main_control"]
+[node name="stow_toggle" type="CheckButton" parent="main_control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -50,6 +61,18 @@ grow_vertical = 2
 button_pressed = true
 text = "Stow Hand"
 
+[node name="submit_selection" type="Button" parent="main_control"]
+layout_mode = 0
+offset_left = 1192.0
+offset_top = 390.0
+offset_right = 1255.0
+offset_bottom = 421.0
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ivf0x")
+theme_override_styles/hover = SubResource("StyleBoxFlat_63yo5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d2u6d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m2ck1")
+text = "Submit"
+
 [node name="player_display_1" parent="." instance=ExtResource("2_gj5ao")]
 unique_name_in_owner = true
 
@@ -58,7 +81,8 @@ unique_name_in_owner = true
 rotation = 3.14159
 hand_visible = false
 
-[connection signal="toggled" from="main_control/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="toggled" from="main_control/stow_toggle" to="." method="_on_check_button_toggled"]
+[connection signal="pressed" from="main_control/submit_selection" to="." method="_on_submit_selection_pressed"]
 [connection signal="discard_pile_clicked" from="player_display_1" to="." method="_on_player_hand_1_discard_pile_clicked"]
 [connection signal="draw_pile_clicked" from="player_display_1" to="." method="_on_player_display_1_draw_pile_clicked"]
 [connection signal="discard_pile_clicked" from="player_display_2" to="." method="_on_player_display_2_discard_pile_clicked"]

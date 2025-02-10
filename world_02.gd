@@ -207,34 +207,90 @@ func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_focus_next"):
 		$main_control/CheckButton.set("button_pressed",!$main_control/CheckButton.button_pressed)
 		
-	# Place selected card
-	# Check if card can be placed, statemachine compatible, etc. etc.
-	var place_valid : bool = (state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0 and state.player_type == Autoload.PLAYER_TYPE.SELF)
+	
+	
+	
 	if Input.is_action_just_pressed("ui_page_up"):
-		if place_valid:
+		
+		#region Place card
+		#if state.action_type == Autoload.ACTION_TYPE.PLACE:
+		
+		#TODO eventually plant to rework statemachine for exclusive logic paths depending on state
+		# Requires separate logic for default actions
+		
+		# Place selected card
+		#TODO Check if card can be placed (state can maybe affect max hand cards temp), statemachine compatible, etc. etc.
+		var place_valid : bool = (state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0 and state.player_type == Autoload.PLAYER_TYPE.SELF)
+		
+		if place_valid: #different logic for place card for other player, but no cards have that effect at time of writing so not implemented
 			check_and_place_last_card()
 			step_action_queue()
+			
 		elif not player_1.default_card_placed:
 			check_and_place_last_card()
 			player_1.default_card_placed = true
 			step_action_queue()
-			
+		#endregion
+		
 		print(state)
 
 
 func check_and_place_last_card() -> void:
 	#get player by name function called here
-			var selected_cards : Array = get_tree().get_nodes_in_group("selected")
-			if selected_cards:
-				var card : CardDisplay = selected_cards[selected_cards.size()-1]
-				if card.player_name == player_1.player_name:
-					if card.cur_card.cur_location == Autoload.CARD_LOCATION.HAND:
-						action_queue.append(card.cur_card.bug_resource.place_action.duplicate())
-						player_1.transfer_card(player_1,"hand",player_1,"placed_cards",card.cur_card)
-						display_hand(player_1,player_display_1)
-						display_placed(player_1,player_display_1)
-				else:
-					print("Not your card!")
+	var selected_cards : Array = get_tree().get_nodes_in_group("selected")
+	if selected_cards:
+		var card : CardDisplay = selected_cards[selected_cards.size()-1]
+		if card.player_name == player_1.player_name:
+			if card.cur_card.cur_location == Autoload.CARD_LOCATION.HAND:
+				action_queue.append(card.cur_card.bug_resource.place_action.duplicate())
+				player_1.transfer_card(player_1,"hand",player_1,"placed_cards",card.cur_card)
+				display_hand(player_1,player_display_1)
+				display_placed(player_1,player_display_1)
+		else:
+			print("Not your card!")
+
+func _on_submit_selection_pressed() -> void:
+	if state.action_type == Autoload.ACTION_TYPE.DISCARD:
+		if get_selection_owner_type() == state.action_type:
+			#No logic for ANY yet
+			var selection : Array = get_tree().get_nodes_in_group("selected")
+			#TODO state == required, evaluate selection size
+			if state.required == false:
+				if selection.size() <= state.number:
+					for i in selection:
+						#TODO get player by name from card, discard card to said player's discard pile
+						pass
+					arrange_hand(player_display_1)
+					arrange_placed(player_display_1)
+					update_other_player(2)
+					#TODO update other players as well, update according to state scope
+
+func get_selection_owner_type() -> Autoload.PLAYER_TYPE:
+	var selection : Array = get_tree().get_nodes_in_group("selected")
+	var first : CardDisplay = selection[0]
+	var initial_player : String = first.player_name
+	
+	var same : bool = true
+	
+	var output : Autoload.PLAYER_TYPE = Autoload.PLAYER_TYPE.SELF
+	
+	for i : CardDisplay in selection:
+		same = (i.name == initial_player)
+		if same == false:
+			break
+	
+	match same:
+		true:
+			if initial_player == player_1.player_name:
+				output = Autoload.PLAYER_TYPE.SELF
+			else:
+				output = Autoload.PLAYER_TYPE.OTHER
+		false:
+			#No logic for ANY yet
+			output = Autoload.PLAYER_TYPE.ANY
+	
+	return output
+
 #endregion
 
 
@@ -246,6 +302,7 @@ func step_action_queue()->void:
 		var new_action = ActionElement.new()
 		new_action.number = 0
 		change_state(new_action)
+		# 0/null/inactive state just in case, might cause debug headaches?
 		print("State queue end reached.")
 		# Logic required at end of state queue, tick turn over?
 		# Manual turn ending is best, could be paired with timer
