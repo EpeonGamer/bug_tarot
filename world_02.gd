@@ -209,7 +209,7 @@ func _input(_event: InputEvent) -> void:
 		
 	# Place selected card
 	# Check if card can be placed, statemachine compatible, etc. etc.
-	if Input.is_action_just_pressed("ui_page_up") and ((state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0) or not player_1.default_card_placed):
+	if Input.is_action_just_pressed("ui_page_up") and ((state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0 and state.player_type == Autoload.PLAYER_TYPE.SELF) or not player_1.default_card_placed):
 			#get player by name function called here
 			var selected_cards : Array = get_tree().get_nodes_in_group("selected")
 			if selected_cards:
@@ -223,7 +223,7 @@ func _input(_event: InputEvent) -> void:
 						
 						if (state.action_type == Autoload.ACTION_TYPE.PLACE and state.player_type == Autoload.PLAYER_TYPE.SELF) and state.number > 0:
 							# NOT CURRENTLY ABLE TO HANDLE MULTIPLE SIMULTANEOUSLY PLACED CARDS
-							state.number -= 1
+							#state.number -= 1
 							step_action_queue()
 						else:
 							player_1.default_card_placed = true
