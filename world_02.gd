@@ -236,7 +236,15 @@ func _input(_event: InputEvent) -> void:
 
 #region Statemachine
 func step_action_queue()->void:
-	change_state(action_queue.pop_front())
+	if not action_queue.is_empty():
+		change_state(action_queue.pop_front())
+	else:
+		var new_action = ActionElement.new()
+		new_action.number = 0
+		change_state(new_action)
+		print("State queue end reached.")
+		# Logic required at end of state queue, tick turn over?
+		# Manual turn ending is best, could be paired with timer
 
 func change_state(action: ActionElement)->void:
 	state = action
@@ -281,7 +289,13 @@ func _on_player_hand_1_discard_pile_clicked() -> void:
 
 func _on_player_display_1_draw_pile_clicked() -> void:
 	#TODO Test hand empty at round start (queue empty?) or state
-	player_1.draw_cards(1,false)
+	#TODO Draw amt control
+	if (state.action_type == Autoload.ACTION_TYPE.DRAW) and (state.number != 0):
+		player_1.draw_cards(state.number,false)
+		step_action_queue()
+	elif player_1.hand.is_empty():
+		player_1.draw_cards(2,false)
+	#TODO "deny" sfx when neither of above applies
 	arrange_draw_pile(player_1, player_display_1)
 	display_hand(player_1,player_display_1)
 #endregion
