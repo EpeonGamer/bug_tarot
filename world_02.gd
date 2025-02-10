@@ -209,8 +209,21 @@ func _input(_event: InputEvent) -> void:
 		
 	# Place selected card
 	# Check if card can be placed, statemachine compatible, etc. etc.
-	if Input.is_action_just_pressed("ui_page_up") and ((state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0 and state.player_type == Autoload.PLAYER_TYPE.SELF) or not player_1.default_card_placed):
-			#get player by name function called here
+	var place_valid : bool = (state.action_type == Autoload.ACTION_TYPE.PLACE and state.number > 0 and state.player_type == Autoload.PLAYER_TYPE.SELF)
+	if Input.is_action_just_pressed("ui_page_up"):
+		if place_valid:
+			check_and_place_last_card()
+			step_action_queue()
+		elif not player_1.default_card_placed:
+			check_and_place_last_card()
+			player_1.default_card_placed = true
+			step_action_queue()
+			
+		print(state)
+
+
+func check_and_place_last_card() -> void:
+	#get player by name function called here
 			var selected_cards : Array = get_tree().get_nodes_in_group("selected")
 			if selected_cards:
 				var card : CardDisplay = selected_cards[selected_cards.size()-1]
@@ -220,15 +233,6 @@ func _input(_event: InputEvent) -> void:
 						player_1.transfer_card(player_1,"hand",player_1,"placed_cards",card.cur_card)
 						display_hand(player_1,player_display_1)
 						display_placed(player_1,player_display_1)
-						
-						if (state.action_type == Autoload.ACTION_TYPE.PLACE and state.player_type == Autoload.PLAYER_TYPE.SELF) and state.number > 0:
-							# NOT CURRENTLY ABLE TO HANDLE MULTIPLE SIMULTANEOUSLY PLACED CARDS
-							#state.number -= 1
-							step_action_queue()
-						else:
-							player_1.default_card_placed = true
-							step_action_queue()
-						print(state)
 				else:
 					print("Not your card!")
 #endregion
