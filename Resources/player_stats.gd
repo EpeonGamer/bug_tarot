@@ -98,6 +98,11 @@ func discard_cards(cards: Array) -> void:
 			discard_pile.append(card)
 			hand.erase(card)
 			emit_signal("card_moved", self, "hand", self, "discard_pile", card)
+		elif placed_cards.has(card):
+			discard_pile.append(card)
+			placed_cards.erase(card)
+			emit_signal("card_moved", self, "placed_cards", self, "discard_pile", card)
+	#TODO perhaps generalize to any card collection
 
 func transfer_card(
 	source_player: PlayerStats, source_name: String,

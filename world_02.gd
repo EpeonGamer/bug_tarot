@@ -36,10 +36,11 @@ var state : ActionElement = ActionElement.new()
 func _ready() -> void:
 	reset_for_turn_start()
 	
-	update_other_player(2)
+	update_all_player_display(2)
 	
 	if testing:
 		run_test_player_1()
+		#TODO rework player name system to rely on IDs instead
 		player_2.player_name = "Voidd"
 	
 
@@ -68,7 +69,7 @@ func run_test_player_1() -> void:
 	for i : BaseCard in player_1.hand:
 		i.randomize_aspects()
 		var element : ActionElement =  ActionElement.new()
-		element.action_type = Autoload.ACTION_TYPE.PLACE
+		element.action_type = Autoload.ACTION_TYPE.DISCARD
 		i.bug_resource.place_action = element
 	for i : BaseCard in player_1.placed_cards:
 		i.randomize_aspects()
@@ -106,7 +107,7 @@ func run_test_player_1() -> void:
 	for i : BaseCard in player_2.hand:
 		i.randomize_aspects()
 		
-	update_other_player(2)
+	update_all_player_display(2)
 #endregion	
 #endregion
 
@@ -251,19 +252,23 @@ func check_and_place_last_card() -> void:
 
 func _on_submit_selection_pressed() -> void:
 	if state.action_type == Autoload.ACTION_TYPE.DISCARD:
-		if get_selection_owner_type() == state.action_type:
-			#No logic for ANY yet
+		if get_selection_owner_type() == state.player_type:
+			# No logic for ANY yet
 			var selection : Array = get_tree().get_nodes_in_group("selected")
-			#TODO state == required, evaluate selection size
+			# Evaluate selection size
+			var selector : bool
 			if state.required == false:
-				if selection.size() <= state.number:
-					for i in selection:
-						#TODO get player by name from card, discard card to said player's discard pile
-						pass
-					arrange_hand(player_display_1)
-					arrange_placed(player_display_1)
-					update_other_player(2)
-					#TODO update other players as well, update according to state scope
+				selector = selection.size() <= state.number
+			else:
+				selector = selection.size() == state.number
+			
+			if selector:
+				for i : CardDisplay in selection:
+					var player = get_player_by_name(i.player_name)
+					player.discard_cards([i.cur_card])
+				update_all_player_display(1)
+				update_all_player_display(2)
+				#TODO update other players as well, update according to state scope
 
 func get_selection_owner_type() -> Autoload.PLAYER_TYPE:
 	var selection : Array = get_tree().get_nodes_in_group("selected")
@@ -275,7 +280,7 @@ func get_selection_owner_type() -> Autoload.PLAYER_TYPE:
 	var output : Autoload.PLAYER_TYPE = Autoload.PLAYER_TYPE.SELF
 	
 	for i : CardDisplay in selection:
-		same = (i.name == initial_player)
+		same = (i.player_name == initial_player)
 		if same == false:
 			break
 	
@@ -291,6 +296,18 @@ func get_selection_owner_type() -> Autoload.PLAYER_TYPE:
 	
 	return output
 
+#TODO rework player name system to rely on IDs instead
+func get_player_by_name(player_name : String) -> PlayerStats:
+	var output : PlayerStats
+	
+	match player_name:
+		player_1.player_name:
+			output = player_1
+		player_2.player_name:
+			output = player_2
+		#FIXME support for the other players
+	
+	return output
 #endregion
 
 
@@ -384,8 +401,13 @@ func process_discard(amount, player_2_stats, player_1_stats, player_display_2_re
 
 
 #region Other player display
-func update_other_player(player_num : int):
+func update_all_player_display(player_num : int):
 	match player_num:
+		1:
+			display_hand(player_1, player_display_1)
+			display_placed(player_1,player_display_1)
+			arrange_discard_pile(player_1,player_display_1)
+			arrange_draw_pile(player_1,player_display_1)
 		2:
 			display_hand(player_2, player_display_2)
 			display_placed(player_2,player_display_2)
