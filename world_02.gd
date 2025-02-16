@@ -15,6 +15,8 @@ var card_display := preload("res://ui_elements/card_display.tscn")
 
 #endregion
 
+@onready var state_feedback: RichTextLabel = %StateFeedback
+
 #region Testing Elements
 @export var testing : bool = false
 @export var hand_limit_test : int = 3
@@ -317,6 +319,7 @@ func step_action_queue()->void:
 		change_state(action_queue.pop_front())
 	else:
 		var new_action = ActionElement.new()
+		#Action will be NONE?
 		new_action.number = 0
 		change_state(new_action)
 		# 0/null/inactive state just in case, might cause debug headaches?
@@ -326,6 +329,10 @@ func step_action_queue()->void:
 
 func change_state(action: ActionElement)->void:
 	state = action
+	updateStateFeedback(state)
+
+func updateStateFeedback(state : ActionElement) -> void:	
+	state_feedback.text = state.to_string()
 #endregion
 
 #region Turn handler

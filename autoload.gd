@@ -14,6 +14,7 @@ enum ASPECT_TYPE{
 }
 
 enum ACTION_TYPE{
+	NONE,
 	DRAW,
 	DISCARD,
 	PLACE,

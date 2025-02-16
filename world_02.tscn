@@ -73,6 +73,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_d2u6d")
 theme_override_styles/normal = SubResource("StyleBoxFlat_m2ck1")
 text = "Submit"
 
+[node name="StateFeedback" type="RichTextLabel" parent="main_control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 800.0
+offset_right = 1280.0
+offset_bottom = 40.0
+text = "Action: NONE | Amount: 0 | Required: FALSE | Player: SELF"
+
 [node name="player_display_1" parent="." instance=ExtResource("2_gj5ao")]
 unique_name_in_owner = true
 
